@@ -160,7 +160,7 @@
             for (var i = 0; i < group.length; i++) {
                 if (group[i].checked) {
                     var team = group[i].nextSibling.nodeValue;
-                    return team;
+                    return team.replace(/\s\s+/g, " ");
                 }
             }
             return null;
