@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <title>NFL Madness</title>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCFIhYywLdhhJkxrdeBiZIQRu9xvkAjd-s",
+            authDomain: "nfl-madness.firebaseapp.com",
+            databaseURL: "https://nfl-madness.firebaseio.com",
+            projectId: "nfl-madness",
+            storageBucket: "nfl-madness.appspot.com"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th colspan="4">Super Bowl</th>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="radio" name="super" value="afc">TBD</td>
+            <td colspan="2"><input type="radio" name="super" value="nfc">TBD</td>
+        </tr>
+        <tr>
+            <th colspan="2">AFC Championship</th>
+            <th colspan="2">NFC Championship</th>
+        </tr>
+        <tr>
+            <td><input type="radio" name="afc" value="afc1">TBD</td>
+            <td><input type="radio" name="afc" value="afc2">TBD</td>
+            <td><input type="radio" name="nfc" value="nfc1">TBD</td>
+            <td><input type="radio" name="nfc" value="nfc2">TBD</td>
+        </tr>
+        <tr>
+            <th colspan="2">AFC Division</th>
+            <th colspan="2">NFC Division</th>
+        </tr>
+        <tr>
+            <td><input type="radio" name="afc1" value="afclow">Lowest</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                        name="afc2" value="afchigh">Highest</div>
+            </td>
+            <td><input type="radio" name="nfc1" value="nfclow">Lowest</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                        name="nfc2" value="nfchigh">Highest</div>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="afc1" value="chiefs">Chiefs 1st</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                        name="afc2" value="patriots">Patriots 2nd</div>
+            </td>
+            <td><input type="radio" name="nfc1" value="saints">Saints 1st</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                        name="nfc2" value="rams">Rams 2nd</div>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">AFC Wild Card</th>
+            <th colspan="2">NFC Wild Card</th>
+        </tr>
+        <tr>
+            <td><input type="radio" name="afcwc1" value="colts">Colts 6th</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                    name="afcwc2" value="chargers">Chargers 5th</div>
+            </td>
+            <td><input type="radio" name="nfcwc1" value="seahawks">Seahawks 5th</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                    name="nfcwc2" value="eagles">Eagles 6th</div>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="afcwc1" value="texans">Texans 3rd</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                    name="afcwc2" value="ravens">Ravens 4th</div>
+            </td>
+            <td><input type="radio" name="nfcwc1" value="cowboys">Cowboys 4th</td>
+            <td>
+                <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
+                    name="nfcwc2" value="bears">Bears 3rd</div>
+            </td>
+        </tr>
+    </table>
+    Name: <input type="text" name="name"><br>
+    <button type="submit" value="Submit">Submit</button>
+</body>
+
+</html>
