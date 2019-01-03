@@ -55,12 +55,15 @@
             </td>
         </tr>
         <tr>
-            <td><input type="radio" name="afc1" onclick="setChampionship('afc1', 'chiefs')" id="chiefs" value="chiefs">Chiefs 1st</td>
+            <td><input type="radio" name="afc1" onclick="setChampionship('afc1', 'chiefs')" id="chiefs" value="chiefs">Chiefs
+                1st</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                        name="afc2" onclick="setChampionship('afc2', 'patriots')" id="patriots" value="patriots">Patriots 2nd</div>
+                        name="afc2" onclick="setChampionship('afc2', 'patriots')" id="patriots" value="patriots">Patriots
+                    2nd</div>
             </td>
-            <td><input type="radio" name="nfc1" onclick="setChampionship('nfc1', 'saints')" id="saints" value="saints">Saints 1st</td>
+            <td><input type="radio" name="nfc1" onclick="setChampionship('nfc1', 'saints')" id="saints" value="saints">Saints
+                1st</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
                         name="nfc2" onclick="setChampionship('nfc2', 'rams')" id="rams" value="rams">Rams 2nd</div>
@@ -97,24 +100,47 @@
     </table>
     Name: <input type="text" id="nameinput"><br>
     <button type="button" onclick="saveToDatabase()" value="Submit">Submit</button>
+    <p id="message"></p>
 
     <script type="text/javascript">
 
         function saveToDatabase() {
             var name = document.getElementById("nameinput").value;
             console.log(name);
+            database.ref('brackets/' + name).set({
+                super: checkedTeam("super"),
+                afc: checkedTeam("afc"),
+                nfc: checkedTeam("nfc"),
+                afcdiv1: checkedTeam("afc1"),
+                afcdiv2: checkedTeam("afc2"),
+                nfcdiv1: checkedTeam("nfc1"),
+                nfcdiv2: checkedTeam("nfc2"),
+                afcwc1: checkedTeam("afcwc1"),
+                afcwc2: checkedTeam("afcwc2"),
+                nfcwc1: checkedTeam("nfcwc1"),
+                nfcwc2: checkedTeam("nfcwc2")
+            }, function(error) {
+                if (error) {
+                    document.getElementById("message").innerText = "Submit failed. Try again.";
+                } else {
+                    document.getElementById("message").innerText = "Submit succeeded.";
+                }
+            });
+
         }
 
         function setDivision(division) {
             console.log(division);
-            var wc1 = checkedSeed(division + "wc1");
-            var wc2 = checkedSeed(division + "wc2");
-            var wc1Seed = parseInt(wc1.charAt(wc1.length - 3));
-            var wc2Seed = parseInt(wc2.charAt(wc2.length - 3));
-            console.log(wc1Seed);
-            console.log(wc2Seed);
-            if (wc1Seed >= 0 && wc2Seed >= 0) {
+            var wc1 = checkedTeam(division + "wc1");
+            var wc2 = checkedTeam(division + "wc2");
+
+            if (wc1 && wc2) {
                 console.log("checked");
+                var wc1Seed = parseInt(wc1.charAt(wc1.length - 3));
+                var wc2Seed = parseInt(wc2.charAt(wc2.length - 3));
+                console.log(wc1Seed);
+                console.log(wc2Seed);
+
                 var lowest = document.getElementById(division + "low").nextSibling;
                 var highest = document.getElementById(division + "high").nextSibling;
                 console.log(lowest.nodeValue);
@@ -129,7 +155,7 @@
             }
         }
 
-        function checkedSeed(name) {
+        function checkedTeam(name) {
             var group = document.getElementsByName(name);
             for (var i = 0; i < group.length; i++) {
                 if (group[i].checked) {
@@ -137,7 +163,7 @@
                     return team;
                 }
             }
-            return -1;
+            return null;
         }
 
         function setChampionship(division, id) {
