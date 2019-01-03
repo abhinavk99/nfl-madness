@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <title>NFL Madness</title>
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>
@@ -24,45 +25,45 @@
             <th colspan="4">Super Bowl</th>
         </tr>
         <tr>
-            <td colspan="2"><input type="radio" name="super" value="afc">TBD</td>
-            <td colspan="2"><input type="radio" name="super" value="nfc">TBD</td>
+            <td colspan="2"><input type="radio" name="super" id="afc" value="afc">TBD</td>
+            <td colspan="2"><input type="radio" name="super" id="nfc" value="nfc">TBD</td>
         </tr>
         <tr>
             <th colspan="2">AFC Championship</th>
             <th colspan="2">NFC Championship</th>
         </tr>
         <tr>
-            <td><input type="radio" name="afc" value="afc1">TBD</td>
-            <td><input type="radio" name="afc" value="afc2">TBD</td>
-            <td><input type="radio" name="nfc" value="nfc1">TBD</td>
-            <td><input type="radio" name="nfc" value="nfc2">TBD</td>
+            <td><input type="radio" name="afc" onclick="setChampionship('afc', 'afc1')" id="afc1" value="afc1">TBD</td>
+            <td><input type="radio" name="afc" onclick="setChampionship('afc', 'afc2')" id="afc2" value="afc2">TBD</td>
+            <td><input type="radio" name="nfc" onclick="setChampionship('nfc', 'nfc1')" id="nfc1" value="nfc1">TBD</td>
+            <td><input type="radio" name="nfc" onclick="setChampionship('nfc', 'nfc2')" id="nfc2" value="nfc2">TBD</td>
         </tr>
         <tr>
             <th colspan="2">AFC Division</th>
             <th colspan="2">NFC Division</th>
         </tr>
         <tr>
-            <td><input type="radio" name="afc1" value="afclow">Lowest</td>
+            <td><input type="radio" name="afc1" onclick="setChampionship('afc1', 'afclow')" id="afclow" value="afclow">Lowest</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                        name="afc2" value="afchigh">Highest</div>
+                        name="afc2" onclick="setChampionship('afc2', 'afchigh')" id="afchigh" value="afchigh">Highest</div>
             </td>
-            <td><input type="radio" name="nfc1" value="nfclow">Lowest</td>
+            <td><input type="radio" name="nfc1" onclick="setChampionship('nfc1', 'nfclow')" id="nfclow" value="nfclow">Lowest</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                        name="nfc2" value="nfchigh">Highest</div>
+                        name="nfc2" onclick="setChampionship('nfc2', 'nfchigh')" id="nfchigh" value="nfchigh">Highest</div>
             </td>
         </tr>
         <tr>
-            <td><input type="radio" name="afc1" value="chiefs">Chiefs 1st</td>
+            <td><input type="radio" name="afc1" onclick="setChampionship('afc1', 'chiefs')" id="chiefs" value="chiefs">Chiefs 1st</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                        name="afc2" value="patriots">Patriots 2nd</div>
+                        name="afc2" onclick="setChampionship('afc2', 'patriots')" id="patriots" value="patriots">Patriots 2nd</div>
             </td>
-            <td><input type="radio" name="nfc1" value="saints">Saints 1st</td>
+            <td><input type="radio" name="nfc1" onclick="setChampionship('nfc1', 'saints')" id="saints" value="saints">Saints 1st</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                        name="nfc2" value="rams">Rams 2nd</div>
+                        name="nfc2" onclick="setChampionship('nfc2', 'rams')" id="rams" value="rams">Rams 2nd</div>
             </td>
         </tr>
         <tr>
@@ -70,32 +71,81 @@
             <th colspan="2">NFC Wild Card</th>
         </tr>
         <tr>
-            <td><input type="radio" name="afcwc1" value="colts">Colts 6th</td>
+            <td><input type="radio" name="afcwc1" onclick="setDivision('afc')" value="colts">Colts 6th</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                    name="afcwc2" value="chargers">Chargers 5th</div>
+                        name="afcwc2" onclick="setDivision('afc')" value="chargers">Chargers 5th</div>
             </td>
-            <td><input type="radio" name="nfcwc1" value="seahawks">Seahawks 5th</td>
+            <td><input type="radio" name="nfcwc1" onclick="setDivision('nfc')" value="seahawks">Seahawks 5th</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                    name="nfcwc2" value="eagles">Eagles 6th</div>
+                        name="nfcwc2" onclick="setDivision('nfc')" value="eagles">Eagles 6th</div>
             </td>
         </tr>
         <tr>
-            <td><input type="radio" name="afcwc1" value="texans">Texans 3rd</td>
+            <td><input type="radio" name="afcwc1" onclick="setDivision('afc')" value="texans">Texans 3rd</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                    name="afcwc2" value="ravens">Ravens 4th</div>
+                        name="afcwc2" onclick="setDivision('afc')" value="ravens">Ravens 4th</div>
             </td>
-            <td><input type="radio" name="nfcwc1" value="cowboys">Cowboys 4th</td>
+            <td><input type="radio" name="nfcwc1" onclick="setDivision('nfc')" value="cowboys">Cowboys 4th</td>
             <td>
                 <div style="border: solid 0 #000000; border-left-width:2px; padding-left:0.5ex"><input type="radio"
-                    name="nfcwc2" value="bears">Bears 3rd</div>
+                        name="nfcwc2" onclick="setDivision('nfc')" value="bears">Bears 3rd</div>
             </td>
         </tr>
     </table>
-    Name: <input type="text" name="name"><br>
-    <button type="submit" value="Submit">Submit</button>
+    Name: <input type="text" id="nameinput"><br>
+    <button type="button" onclick="saveToDatabase()" value="Submit">Submit</button>
+
+    <script type="text/javascript">
+
+        function saveToDatabase() {
+            var name = document.getElementById("nameinput").value;
+            console.log(name);
+        }
+
+        function setDivision(division) {
+            console.log(division);
+            var wc1 = checkedSeed(division + "wc1");
+            var wc2 = checkedSeed(division + "wc2");
+            var wc1Seed = parseInt(wc1.charAt(wc1.length - 3));
+            var wc2Seed = parseInt(wc2.charAt(wc2.length - 3));
+            console.log(wc1Seed);
+            console.log(wc2Seed);
+            if (wc1Seed >= 0 && wc2Seed >= 0) {
+                console.log("checked");
+                var lowest = document.getElementById(division + "low").nextSibling;
+                var highest = document.getElementById(division + "high").nextSibling;
+                console.log(lowest.nodeValue);
+                console.log(highest.nodeValue);
+                if (wc1Seed < wc2Seed) {
+                    lowest.nodeValue = wc1;
+                    highest.nodeValue = wc2;
+                } else {
+                    lowest.nodeValue = wc2;
+                    highest.nodeValue = wc1;
+                }
+            }
+        }
+
+        function checkedSeed(name) {
+            var group = document.getElementsByName(name);
+            for (var i = 0; i < group.length; i++) {
+                if (group[i].checked) {
+                    var team = group[i].nextSibling.nodeValue;
+                    return team;
+                }
+            }
+            return -1;
+        }
+
+        function setChampionship(division, id) {
+            var team = document.getElementById(id).nextSibling.nodeValue;
+            document.getElementById(division).nextSibling.nodeValue = team;
+        }
+
+    </script>
 </body>
 
 </html>
